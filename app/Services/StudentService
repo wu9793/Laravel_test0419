@@ -1,0 +1,42 @@
+<?php
+namespace App\Services;
+
+use App\Models\Student;
+
+class StudentService
+{
+    protected $student;
+
+    public function __construct(Student $student)
+    {
+        $this->student = $student;
+    }
+
+    public function getAllStudents()
+    {
+        return $this->student->all();
+    }
+
+    public function createStudent(array $data)
+    {
+        return $this->student->create($data);
+    }
+
+    public function getStudentById(string $id)
+    {
+        return $this->student->find($id);
+    }
+
+    public function updateStudent(array $data, string $id)
+    {
+        $student = $this->student->find($id);
+        $student->update($data);
+        return $student;
+    }
+
+    public function deleteStudent(string $id)
+    {
+        $student = $this->student->find($id);
+        return $student->delete();
+    }
+}
