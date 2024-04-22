@@ -1,42 +1,42 @@
 <?php
 namespace App\Services;
 
-use App\Models\Student;
+use App\Repositories\StudentRepository;
 
 class StudentService
 {
-    protected $student;
+    protected $studentRepo;
 
-    public function __construct(Student $student)
+    public function __construct(StudentRepository $studentRepo)
     {
-        $this->student = $student;
+        $this->studentRepo = $studentRepo;
     }
 
     public function getAllStudents()
     {
-        return $this->student->all();
+        return $this->studentRepo->getAll();
     }
 
     public function createStudent(array $data)
     {
-        return $this->student->create($data);
+        return $this->studentRepo->create($data);
     }
 
     public function getStudentById(string $id)
     {
-        return $this->student->find($id);
+        return $this->studentRepo->findById($id);
     }
 
     public function updateStudent(array $data, string $id)
     {
-        $student = $this->student->find($id);
+        $student = $this->studentRepo->findById($id);
         $student->update($data);
         return $student;
     }
 
     public function deleteStudent(string $id)
     {
-        $student = $this->student->find($id);
+        $student = $this->studentRepo->findById($id);
         return $student->delete();
     }
 }
